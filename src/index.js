@@ -1,5 +1,6 @@
 import './css/styles.css';
-import _debounce from 'lodash.debounce'
+import _debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -24,4 +25,5 @@ function onInputChange(e) {
     countryName = e.target.value.trim();
    
 }
-refs.searchQuery.addEventListener('input', _debounce((onInputChange, DEBOUNCE_DELAY)));
+refs.searchQuery.addEventListener('input', _debounce(onInputChange, DEBOUNCE_DELAY));
+
