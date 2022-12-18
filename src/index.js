@@ -15,25 +15,22 @@ const refs = {
 
 let countryName = '';
 function onInputChange(e) {
-    e.preventDefault();
-    countryName = e.target.value.trim();
-
-    if (refs.searchQuery = '') {
+    if ((refs.searchQuery = '')) {
         markupClear();
         return;
     }
-   
-}
-refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
+
+    e.preventDefault();
+    countryName = e.target.value.trim();
 
 fetchCountries(countryName)
     .then(countries => {
-        if (countries.length = 1) {
+        if (countries.length === 1) {
             markupClear();
             countryInfoMarkup(countries);
             return;
         }
-        else if (countries.length >= 2 && countries.length <= 10) {
+        else if (countries.length >= 2 || countries.length <= 10) {
             markupClear();
             countryListMarkup(countries);
             return;
@@ -44,6 +41,9 @@ fetchCountries(countryName)
         }
     })
     .catch(Notify.failure("Oops, there is no country with that name"));
+}
+refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
+
 
 function markupClear() {
     refs.countryInfo.innerHTML = '';
