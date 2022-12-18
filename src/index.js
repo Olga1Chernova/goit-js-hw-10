@@ -4,17 +4,16 @@ import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
-let countryName = '';
-
 import { fetchCountries } from './fetchCountries';
 fetchCountries();
 
-refs = {
+const refs = {
     searchQuery: document.getElementById("search-box"),
     countryList: document.querySelector('.country-list'),
     countryInfo: document.querySelector('.country-info'),
 }
 
+let countryName = '';
 function onInputChange(e) {
     if (refs.searchQuery = '') {
         markupClear();
@@ -28,14 +27,16 @@ refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELA
 
 fetchCountries(countryName)
     .then(countries => {
-        if (countries.length > 10) {
+        console.log(countries);
+        if (countries.length = 1) {
             markupClear();
-            Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
-        } else if (countries.length >= 2 || countries.length <= 10) {
+        }
+        else if (countries.length >= 2 || countries.length <= 10) {
             markupClear();
             countryListMarkup();
-        } else if (countries.length = 1) {
+        } else if (countries.length > 10) {
             markupClear();
+            Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
         }
     })
     .catch(Notiflix.Notify.failure("Oops, there is no country with that name"));
@@ -48,9 +49,9 @@ function markupClear() {
 function countryListMarkup(countries) {
     const markup = countries
         .map(country => {
-            return `<li>
-            <img src="${country.flags.svg}" alt = "flag of a country"/>
-            <p>${country.name}</p>
+            return `<li class="country-item">
+            <img src="${country.flags}" alt = "flag of a country" class="country-image"/>
+            <p class = "country-name">${country.name}</p>
             </li>`
     })
     .join('')
@@ -62,11 +63,9 @@ function countryInfoMarkup(countries) {
     const markup = countries
         .map(country => {
             return `<li>
-            <img src="${country.flags.svg}" alt = "flag of a country"/>
-           <h2>${country.name}</h2>
-           <p>${country.capital}</p>
-           <p>${country.population}</p>
-           <p>${langARrr}</p>
+            <p class="add-info">Capital: <span class="value">${country.capital}</span></p>
+            <p class="add-info">Population: <span class="value">${country.population}</span></p>
+            <p class="add-info">languages: <span class="value">${langARrr}</span></p>
            </li>`
         })
     .join('')
