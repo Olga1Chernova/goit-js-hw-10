@@ -5,7 +5,7 @@ import { Notify } from 'notiflix';
 const DEBOUNCE_DELAY = 300;
 
 import { fetchCountries } from './fetchCountries';
-fetchCountries();
+
 
 const refs = {
     searchQuery: document.querySelector("#search-box"),
