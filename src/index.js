@@ -49,10 +49,24 @@ function countryListMarkup(countries) {
     const markup = countries
         .map(country => {
             return `<li>
-        <span>${country.flags.svg}</span>
-        <p>${country.name}</p>
-        </li>`
+            <img src="${country.flags.svg}" alt = "flag of a country"/>
+            <p>${country.name}</p>
+            </li>`
     })
     .join('')
-    refs.countryList.insertAdjacentHTML('beforeend', markup)
+    refs.countryList.insertAdjacentHTML('beforeend', markup);
+}
+
+function countryInfoMarkup(countries) {
+    const langARrr = countries.map(({ languages }) => Object.values(languages).join(', '));
+    const markup = countries
+        .map(country => {
+            return `<li>
+            <img src="${country.flags.svg}" alt = "flag of a country"/>
+           <h2>${country.name}</h2>
+           <p>${country.capital}</p>
+           <p>${country.population}</p>
+           <p>${langARrr}</p>
+           </li>`
+        })
 }
