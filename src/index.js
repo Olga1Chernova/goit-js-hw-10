@@ -15,35 +15,28 @@ const refs = {
 
 let countryName = '';
 function onInputChange(e) {
-    if ((refs.searchQuery = '')) {
+    e.preventDefault();
+    countryName = e.target.value.trim();
+    if (countryName === '') {
         markupClear();
         return;
     }
-
-    e.preventDefault();
-    countryName = e.target.value.trim();
-
-fetchCountries(countryName)
-    .then(countries => {
-        if (countries.length === 1) {
-            markupClear();
-            countryInfoMarkup(countries);
-            return;
-        }
-        else if (countries.length >= 2 || countries.length <= 10) {
-            markupClear();
-            countryListMarkup(countries);
-            return;
-        } else if (countries.length > 10) {
-            markupClear();
-            Notify.info('Too many matches found. Please enter a more specific name.');
-            return;
-        }
-    })
-    .catch(Notify.failure("Oops, there is no country with that name"));
+    fetchCountries(countryName)
+      .then(countries => {
+          if (countries.length === 1) {
+              markupClear();
+              countryInfoMarkup(countries);
+          }
+          else if (countries.length >= 2 && countries.length <= 10) {
+              markupClear();
+              countryListMarkup(countries);
+          } else if (countries.length > 10) {
+              markupClear();
+              Notify.info('Too many matches found. Please enter a more specific name.');
+          }
+      }).catch(() => Notify.failure("Oops, there is no country with that name"));
 }
 refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
-
 
 function markupClear() {
     refs.countryInfo.innerHTML = '';
