@@ -8,7 +8,7 @@ import { fetchCountries } from './fetchCountries';
 fetchCountries();
 
 const refs = {
-    searchQuery: document.getElementById("search-box"),
+    searchQuery: document.querySelector("#search-box"),
     countryList: document.querySelector('.country-list'),
     countryInfo: document.querySelector('.country-info'),
 };
@@ -33,7 +33,7 @@ fetchCountries(countryName)
             countryInfoMarkup(countries);
             return;
         }
-        else if (countries.length >= 2 || countries.length <= 10) {
+        else if (countries.length >= 2 && countries.length <= 10) {
             markupClear();
             countryListMarkup(countries);
             return;
