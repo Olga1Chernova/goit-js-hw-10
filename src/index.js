@@ -55,7 +55,7 @@ function countryListMarkup(countries) {
         .map(country => {
             return `<li class="country-item">
             <img src="${country.flags.svg}" alt = "flag of a country" class="country-image"/>
-            <p class = "country-name">${country.name}</p>
+            <p class = "country-name">${country.name.official}</p>
             </li>`
     })
     .join('')
@@ -67,7 +67,8 @@ function countryInfoMarkup(countries) {
     const markup = countries
         .map(country => {
             return `<li>
-            
+            <img src="${country.flags.svg}" alt = "flag of a country" class="country-image"/>
+            <p class = "country-name">${country.name.official}</p>
             <p class="add-info">Capital: <span class="value">${country.capital}</span></p>
             <p class="add-info">Population: <span class="value">${country.population}</span></p>
             <p class="add-info">languages: <span class="value">${langARrr}</span></p>
