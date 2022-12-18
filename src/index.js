@@ -67,6 +67,7 @@ function countryInfoMarkup(countries) {
     const markup = countries
         .map(country => {
             return `<li>
+            
             <p class="add-info">Capital: <span class="value">${country.capital}</span></p>
             <p class="add-info">Population: <span class="value">${country.population}</span></p>
             <p class="add-info">languages: <span class="value">${langARrr}</span></p>
