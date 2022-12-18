@@ -15,12 +15,13 @@ const refs = {
 
 let countryName = '';
 function onInputChange(e) {
+    e.preventDefault();
+    countryName = e.target.value.trim();
+
     if (refs.searchQuery = '') {
         markupClear();
         return;
     }
-    e.preventDefault();
-    countryName = e.target.value.trim();
    
 }
 refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
@@ -30,13 +31,16 @@ fetchCountries(countryName)
         if (countries.length = 1) {
             markupClear();
             countryInfoMarkup(countries);
+            return;
         }
         else if (countries.length >= 2 || countries.length <= 10) {
             markupClear();
             countryListMarkup(countries);
+            return;
         } else if (countries.length > 10) {
             markupClear();
             Notify.info('Too many matches found. Please enter a more specific name.');
+            return;
         }
     })
     .catch(Notify.failure("Oops, there is no country with that name"));
@@ -50,7 +54,7 @@ function countryListMarkup(countries) {
     const markup = countries
         .map(country => {
             return `<li class="country-item">
-            <img src="${country.flags}" alt = "flag of a country" class="country-image"/>
+            <img src="${country.flags.svg}" alt = "flag of a country" class="country-image"/>
             <p class = "country-name">${country.name}</p>
             </li>`
     })
