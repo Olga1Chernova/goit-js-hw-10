@@ -11,7 +11,7 @@ const refs = {
     searchQuery: document.getElementById("search-box"),
     countryList: document.querySelector('.country-list'),
     countryInfo: document.querySelector('.country-info'),
-}
+};
 
 let countryName = '';
 function onInputChange(e) {
@@ -27,7 +27,6 @@ refs.searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELA
 
 fetchCountries(countryName)
     .then(countries => {
-        console.log(countries);
         if (countries.length = 1) {
             markupClear();
         }
