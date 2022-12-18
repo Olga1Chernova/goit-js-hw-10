@@ -69,4 +69,6 @@ function countryInfoMarkup(countries) {
            <p>${langARrr}</p>
            </li>`
         })
+    .join('')
+    refs.countryInfo.insertAdjacentHTML('beforeend', markup);
 }
